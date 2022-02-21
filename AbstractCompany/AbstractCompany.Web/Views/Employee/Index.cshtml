@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Сотрудники компании</h2>
+
+<div class="row">
+    <div class="col-sm-12">
+        <button type="button" class="btn btn-secondary">
+            @Html.ActionLink("Добавить сотрудника", "Create")
+        </button>
+        <button type="button" class="btn btn-secondary">
+            @Html.ActionLink("Отчет ", "GetPositionsReport")
+        </button>
+        <div class="form-inline pull-right">
+            <label>Поиск по должности</label>
+            <input type="text" class="form-control" id="textSearch" />
+        </div>
+    </div>
+    <div id="gridEmployees" class="col-sm-12" style="margin-top: 10px"></div>
+</div>
+
+<script>
+    $(() => {
+        getEmployees();
+        $('#textSearch').on('keyup',
+            () => {
+                getEmployees();
+            });
+    });
+    function getEmployees() {
+        $.ajax({
+            url: '@Url.Action("SearchByPosition", "Employee")',
+            datatype: 'html',
+            method: 'GET',
+            data: { text: $('#textSearch').val() },
+            success: function(res) {
+                $('#gridEmployees').html('').html(res);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        })
+    }
+</script>

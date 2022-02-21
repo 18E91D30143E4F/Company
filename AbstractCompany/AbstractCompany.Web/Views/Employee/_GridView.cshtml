@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Domain.Employee>
+
+<table class="table table-striped table-bordered" id="employeeTable">
+    <thead>
+        <tr>
+            <th scope="col">Имя</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Должность</th>
+            <th scope="col">Год рождения</th>
+            <th scope="col">Зарплата</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.Name</td>
+                <td>@employee.Surname</td>
+                <td>@employee.PositionName</td>
+                <td>@employee.Birthday.Year</td>
+                <td>@employee.Salary</td>
+                <td width="150px">
+                    <a class="btn btn-default" style="margin-left: 5px" href="@Url.Action("Edit", "Employee", new { id = employee.Id })">Редактировать</a>
+                    <a class="btn btn-default" style="margin-left: 5px" href="@Url.Action("Delete", "Employee", new { id = employee.Id })">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

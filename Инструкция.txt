@@ -1,0 +1,3 @@
+Нужно создать базу данных, в ней выполнить скрипт "Db -> Generate tables", затем "Fill tables.sql".
+В файле "Data -> DbSettings.cs" заменить ConnectionString на вашу строку подкючения к бд.
+Собираем приложение.
